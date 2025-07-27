@@ -4,14 +4,13 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.msb.hjycommunity.common.constant.HttpStatus;
 import com.msb.hjycommunity.common.core.controller.BaseController;
+import com.msb.hjycommunity.common.core.domain.BaseResponse;
 import com.msb.hjycommunity.common.core.page.PageResult;
 import com.msb.hjycommunity.common.utils.ServletUtils;
 import com.msb.hjycommunity.community.domain.HjyCommunity;
 import com.msb.hjycommunity.community.domain.dto.HjyCommunityDto;
 import com.msb.hjycommunity.community.service.HjyCommunityService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -42,4 +41,24 @@ public class HjyCommunityController extends BaseController {
         //响应数据
         return   getData(list);
     }
+    
+    @PostMapping
+    public BaseResponse add(@RequestBody HjyCommunity hjyCommunity) {
+        return toAjax(hjyCommunityService.insertHjyCommunity(hjyCommunity));
+    }
+    @GetMapping("/{communityId}")
+    public BaseResponse getInfo(@PathVariable("communityId") Long communityId) {
+        return BaseResponse.success(hjyCommunityService.selectHjyCommunityById(communityId));
+    }
+    
+    @PutMapping
+    public BaseResponse edit(@RequestBody HjyCommunity hjyCommunity) {
+        return toAjax(hjyCommunityService.updateHjyCommunity(hjyCommunity));
+    }
+    
+    @DeleteMapping("/{communityIds}")
+    public BaseResponse delete(@PathVariable("communityIds") Long[] communityIds) {
+        return toAjax(hjyCommunityService.deleteHjyCommunity(communityIds));
+    }
+    
 }

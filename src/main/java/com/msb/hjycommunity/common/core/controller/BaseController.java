@@ -2,6 +2,7 @@ package com.msb.hjycommunity.common.core.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.msb.hjycommunity.common.constant.HttpStatus;
+import com.msb.hjycommunity.common.core.domain.BaseResponse;
 import com.msb.hjycommunity.common.core.page.PageDomain;
 import com.msb.hjycommunity.common.core.page.PageResult;
 import com.msb.hjycommunity.common.utils.ServletUtils;
@@ -48,6 +49,16 @@ public class BaseController {
 		pageResult.setRows(list);
 		pageResult.setTotal(new PageInfo(list).getTotal());
 		return pageResult;
+	}
+	
+	/**
+	 * 响应返回结果 （针对增删改 操作）
+	 * @param rows  受影响的行数
+	 * @return: com.msb.hjycommunity.common.core.domain.BaseResponse
+	 */
+	protected BaseResponse toAjax(int rows){
+		
+		return rows > 0 ? BaseResponse.success(rows) : BaseResponse.fail("操作失败");
 	}
 
 }

@@ -7,4 +7,15 @@ import java.util.List;
 
 public interface HjyCommunityService {
     List<HjyCommunityDto> queryList(HjyCommunity hjyCommunity);
+    
+    int insertHjyCommunity(HjyCommunity hjyCommunity);
+    
+    HjyCommunity selectHjyCommunityById(Long communityId);
+    
+    int updateHjyCommunity(HjyCommunity hjyCommunity);
+    
+    int deleteHjyCommunity(Long[] communityIds);
+    
+//    List<HjyCommunityDto> queryPullDown(HjyCommunity hjyCommunity);
 }
+
